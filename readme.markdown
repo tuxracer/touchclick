@@ -1,7 +1,7 @@
 jQuery TouchClick
 ==================
 
-This is a small jQuery plugin to enabling binding to either the touch events or the click event depending on what's available for the given platform. This is based on the jQuery plugin provided by [Alexandre](http://stackoverflow.com/users/346368/alexandre) on [stackoverflow](http://stackoverflow.com/questions/2135037/adding-a-jquery-style-event-handler-of-iphone-os-events)
+This is a small jQuery plugin to enable binding to either the touch events or the click event depending on what's available for the given platform. This is based on the jQuery plugin provided by [Alexandre](http://stackoverflow.com/users/346368/alexandre) on [stackoverflow](http://stackoverflow.com/questions/2135037/adding-a-jquery-style-event-handler-of-iphone-os-events)
 
 On most touchscreen platforms the browser waits to 500ms before it triggers the 'click' event when the user touches the screen. This intentional delay provides time to decide whether or not it should trigger the taphold event. Unfortunately this creates a noticeable lag in the interface for web apps that depend on the 'click' event.
 
