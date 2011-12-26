@@ -11,14 +11,14 @@ This plugin aims to alleviate both of these problems by binding to the touch eve
 
 As it was originally created the wait for a touchend event causes its own problems with regards to a delay. Native touchscreen apps tend to show the button being pressed or darkened *immediately* after the user touches the screen however they don't actually trigger if the user swipes or doesn't lift their finger off the screen from that element.
 
-In order to emulate that this plugin has been modified to attach a "touchstart" class to elements *immediately* after the user presses on the screen and removes the "touchstart" class on the touchend event.
+In order to emulate that this plugin has been modified to attach a "touchactive" class to elements *immediately* after the user presses on the screen and removes the "touchactive" class on the touchend or touchmove events.
 
 Instructions
 -------------
 
 Include jquery.touchclick.js after jQuery has loaded
 Bind to the "touchclick" event
-Define a .touchstart style for the element so that touchscreen users receive immediate feedback the instant their finger touches the screen
+Define a .touchactive style for the element so that touchscreen users receive immediate feedback the instant their finger touches the screen
 
 Derek Petersen
 https://plus.google.com/118244156822447731503
