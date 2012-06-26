@@ -1,53 +1,47 @@
 jQuery.event.special.touchclick = {
 	setup: function (data, namespaces) {
-	var elem = this, $elem = jQuery(elem);
-	
-	/* Android's horrificly bad browser does not support window.Touch so we'll resort to UA sniffing */
-	var ua = navigator.userAgent.toLowerCase();
-	var isAndroid = ua.indexOf("android") > -1;
-	
-	if (window.Touch || isAndroid) {
-			$elem.bind('touchstart', jQuery.event.special.touchclick.onTouchStart);
-			$elem.bind('touchmove', jQuery.event.special.touchclick.onTouchMove);
-			$elem.bind('touchend', jQuery.event.special.touchclick.onTouchEnd);
+		var elem = this,
+			$elem = jQuery(elem);
+
+		if (typeof window.ontouchstart !== "undefined") {
+			$elem.on('touchstart', jQuery.event.special.touchclick.touchstart);
+			$elem.on('touchmove', jQuery.event.special.touchclick.touchmove);
+			$elem.on('touchend', jQuery.event.special.touchclick.touchend);
 		} else {
-			$elem.bind('click', jQuery.event.special.touchclick.click);
+			$elem.on("click", jQuery.event.special.touchclick.click);
 		}
 	},
-	
+
 	click: function (event) {
 		event.type = "touchclick";
 		jQuery.event.handle.apply(this, arguments);
 	},
-	
+
 	teardown: function (namespaces) {
-		if (window.Touch) {
-			$elem.unbind('touchstart', jQuery.event.special.touchclick.onTouchStart);
-			$elem.unbind('touchmove', jQuery.event.special.touchclick.onTouchMove);
-			$elem.unbind('touchend', jQuery.event.special.touchclick.onTouchEnd);
+		if (typeof window.ontouchstart !== "undefined") {
+			$elem.off("touchstart", jQuery.event.special.touchclick.touchstart);
+			$elem.off("touchmove", jQuery.event.special.touchclick.touchmove);
+			$elem.off("touchend", jQuery.event.special.touchclick.touchend);
 		} else {
-			$elem.unbind('click', jQuery.event.special.touchclick.click);
+			$elem.off("click", jQuery.event.special.touchclick.click);
 		}
 	},
-	
-	onTouchStart: function (e) {
+
+	touchstart: function (event) {
 		this.moved = false;
-		
-		$(this).addClass('touchactive');
+		$(this).addClass("touchactive");
 	},
-	
-	onTouchMove: function (e) {
+
+	touchmove: function (event) {
 		this.moved = true;
-		
-		$(this).removeClass('touchactive');
+		$(this).removeClass("touchactive");
 	},
-	
-	onTouchEnd: function (event) {
+
+	touchend: function (event) {
 		if (!this.moved) {
 			event.type = "touchclick";
-			jQuery.event.handle.apply(this, arguments)
+			jQuery.event.handle.apply(this, arguments);
 		}
-		
-		$(this).removeClass('touchactive');
+		$(this).removeClass("touchactive");
 	}
 };
