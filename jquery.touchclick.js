@@ -1,7 +1,7 @@
 jQuery.event.special.touchclick = {
 	setup: function (data, namespaces) {
 		var elem = this,
-			$elem = jQuery(elem);
+		$elem = jQuery(elem);
 
 		if (typeof window.ontouchstart !== "undefined") {
 			$elem.on('touchstart', jQuery.event.special.touchclick.touchstart);
@@ -18,6 +18,10 @@ jQuery.event.special.touchclick = {
 	},
 
 	teardown: function (namespaces) {
+		
+		var elem = this,
+		$elem = jQuery(elem);
+		
 		if (typeof window.ontouchstart !== "undefined") {
 			$elem.off("touchstart", jQuery.event.special.touchclick.touchstart);
 			$elem.off("touchmove", jQuery.event.special.touchclick.touchmove);
