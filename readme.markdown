@@ -9,9 +9,9 @@ One common method of overcoming this problem is to bind to the touchstart event 
 
 This plugin aims to alleviate both of these problems by binding to the touch events, but not triggering until the *touchend* event so long as a touchmove event didn't take place between the time the touchstart event and the touchend event.
 
-As it was originally created the wait for a touchend event causes its own problems with regards to a delay. Native touchscreen apps tend to show the button being pressed or darkened *immediately* after the user touches the screen however they don't actually trigger if the user swipes or doesn't lift their finger off the screen from that element.
+As it was originally created, the wait for a touchend event causes its own problems with regards to a delay. Native touchscreen apps tend to show the button being pressed or darkened *immediately* after the user touches the screen however they don't actually trigger if the user swipes or doesn't lift their finger off the screen from that element.
 
-In order to emulate that this plugin has been modified to attach a "touchactive" class to elements *immediately* after the user presses on the screen and removes the "touchactive" class on the touchend or touchmove events.
+In order to emulate that, this plugin has been modified to attach a "touchactive" class to elements *immediately* after the user presses on the screen and removes the "touchactive" class on the touchend or touchmove events.
 
 Instructions
 -------------
