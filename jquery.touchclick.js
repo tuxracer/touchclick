@@ -2,11 +2,12 @@
     $.event.special.touchclick = {
         setup: function () {
             if (typeof window.ontouchstart !== "undefined") {
-                $(this).on('touchstart', $.event.special.touchclick.touchstart);
-                $(this).on('touchmove', $.event.special.touchclick.touchmove);
-                $(this).on('touchend', $.event.special.touchclick.touchend);
+                $(this).on("touchstart", $.event.special.touchclick.touchstart);
+                $(this).on("touchmove", $.event.special.touchclick.touchmove);
+                $(this).on("touchend", $.event.special.touchclick.touchend);
             } else {
-                $(this).on("click", $.event.special.touchclick.click);
+                $(this).on("mousedown", $.event.special.touchclick.touchstart);
+                $(this).on("mouseup", $.event.special.touchclick.touchend);
             }
         },
 
@@ -21,7 +22,8 @@
                 $(this).off("touchmove", $.event.special.touchclick.touchmove);
                 $(this).off("touchend", $.event.special.touchclick.touchend);
             } else {
-                $(this).off("click", $.event.special.touchclick.click);
+                $(this).off("mousedown", $.event.special.touchclick.touchstart);
+                $(this).off("mouseup", $.event.special.touchclick.touchend);
             }
         },
 
