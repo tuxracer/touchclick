@@ -35,7 +35,7 @@
             $(this).removeClass("touchactive");
         },
 
-        touchend: function (event) {
+        touchend: function () {
             if (!this.moved) {
                 $.event.special.touchclick.click.apply(this, arguments);
             }
