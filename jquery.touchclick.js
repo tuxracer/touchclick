@@ -1,51 +1,45 @@
-jQuery.event.special.touchclick = {
-	setup: function (data, namespaces) {
-		var elem = this,
-		$elem = jQuery(elem);
+(function ($) {
+    $.event.special.touchclick = {
+        setup: function () {
+            if (typeof window.ontouchstart !== "undefined") {
+                $(this).on('touchstart', $.event.special.touchclick.touchstart);
+                $(this).on('touchmove', $.event.special.touchclick.touchmove);
+                $(this).on('touchend', $.event.special.touchclick.touchend);
+            } else {
+                $(this).on("click", $.event.special.touchclick.click);
+            }
+        },
 
-		if (typeof window.ontouchstart !== "undefined") {
-			$elem.on('touchstart', jQuery.event.special.touchclick.touchstart);
-			$elem.on('touchmove', jQuery.event.special.touchclick.touchmove);
-			$elem.on('touchend', jQuery.event.special.touchclick.touchend);
-		} else {
-			$elem.on("click", jQuery.event.special.touchclick.click);
-		}
-	},
+        click: function (event) {
+            event.type = "touchclick";
+            $(this).trigger(event.type, arguments);
+        },
 
-	click: function (event) {
-		event.type = "touchclick";
-    $(this).trigger(event.type, arguments);
-	},
+        teardown: function () {
+            if (typeof window.ontouchstart !== "undefined") {
+                $(this).off("touchstart", $.event.special.touchclick.touchstart);
+                $(this).off("touchmove", $.event.special.touchclick.touchmove);
+                $(this).off("touchend", $.event.special.touchclick.touchend);
+            } else {
+                $(this).off("click", $.event.special.touchclick.click);
+            }
+        },
 
-	teardown: function (namespaces) {
-		
-		var elem = this,
-		$elem = jQuery(elem);
-		
-		if (typeof window.ontouchstart !== "undefined") {
-			$elem.off("touchstart", jQuery.event.special.touchclick.touchstart);
-			$elem.off("touchmove", jQuery.event.special.touchclick.touchmove);
-			$elem.off("touchend", jQuery.event.special.touchclick.touchend);
-		} else {
-			$elem.off("click", jQuery.event.special.touchclick.click);
-		}
-	},
+        touchstart: function () {
+            this.moved = false;
+            $(this).addClass("touchactive");
+        },
 
-	touchstart: function (event) {
-		this.moved = false;
-		$(this).addClass("touchactive");
-	},
+        touchmove: function () {
+            this.moved = true;
+            $(this).removeClass("touchactive");
+        },
 
-	touchmove: function (event) {
-		this.moved = true;
-		$(this).removeClass("touchactive");
-	},
-
-	touchend: function (event) {
-		if (!this.moved) {
-			event.type = "touchclick";
-      $(this).trigger(event.type, arguments);
-		}
-		$(this).removeClass("touchactive");
-	}
-};
+        touchend: function (event) {
+            if (!this.moved) {
+                $.event.special.touchclick.click.apply(this, arguments);
+            }
+            $(this).removeClass("touchactive");
+        }
+    };
+})(jQuery);
