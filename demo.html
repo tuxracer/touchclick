@@ -1,0 +1,56 @@
+
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<style>
+		* {
+		    -webkit-touch-callout: none;
+		    -webkit-tap-highlight-color: rgba(0,0,0,0);
+		    -webkit-user-select: none;
+		}
+
+		div {
+		    font-family: "Helvetica Neue", sans-serif;
+		    font-size: 14px;
+		    line-height: 50px;
+		    color: #333;
+		    width: 250px;
+		    height: 50px;
+		    padding: 10px;
+		    border: 1px solid #888;
+		    text-align: center;
+		    margin-bottom: 10px;
+		    background: -webkit-linear-gradient(top, #dddddd 0%,#aaaaaa 100%);
+		    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+		    cursor: default;
+		}
+
+		div.touchactive {
+		    background: -webkit-linear-gradient(top, #aaaaaa 0%,#dddddd 100%);
+		}
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="jquery.touchclick.js"></script>
+</head>
+<body>
+	<div id="best"></div>
+	<div id="better"></div>
+	<div id="bad"></div>
+
+	<script>
+		$("#best").on("touchclick", function () {
+		    $(this).html("touchclick " + Math.random());
+		});
+
+		$("#better").on("touchend", function () {
+		    $(this).html("touchend " + Math.random());
+		});
+
+		$("#bad").on("click", function () {
+		    $(this).html("click " + Math.random());
+		});
+	</script>
+</body>
+</html>
