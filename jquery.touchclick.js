@@ -14,7 +14,7 @@ jQuery.event.special.touchclick = {
 
 	click: function (event) {
 		event.type = "touchclick";
-		jQuery.event.handle.apply(this, arguments);
+    $(this).trigger(event.type, arguments);
 	},
 
 	teardown: function (namespaces) {
@@ -44,7 +44,7 @@ jQuery.event.special.touchclick = {
 	touchend: function (event) {
 		if (!this.moved) {
 			event.type = "touchclick";
-			jQuery.event.handle.apply(this, arguments);
+      $(this).trigger(event.type, arguments);
 		}
 		$(this).removeClass("touchactive");
 	}
