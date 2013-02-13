@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="msapplication-tap-highlight" content="no">
     <style>
         * {
             -webkit-touch-callout: none;
@@ -46,16 +47,22 @@
     <div id="bad"></div>
 
     <script>
-        $("#best").on("touchclick", function () {
-            $(this).html("touchclick " + Math.random());
-        });
+        $(function() {
+            var random = function() {
+                return Math.floor((Math.random()*100)+1);
+            };
 
-        $("#better").on("touchend", function () {
-            $(this).html("touchend " + Math.random());
-        });
+            $("#best").on("touchclick", function () {
+                $(this).html("touchclick " + random());
+            });
 
-        $("#bad").on("click", function () {
-            $(this).html("click " + Math.random());
+            $("#better").on("touchend MSPointerUp", function () {
+                $(this).html("touchend " + random());
+            });
+
+            $("#bad").on("click", function () {
+                $(this).html("click " + random());
+            });
         });
     </script>
 </body>
