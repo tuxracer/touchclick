@@ -7,6 +7,7 @@
                 $(this).on("touchend", $.event.special.touchclick.touchend);
             } else {
                 $(this).on("mousedown", $.event.special.touchclick.touchstart);
+                $(this).on("mousemove", $.event.special.touchclick.touchmove);
                 $(this).on("mouseup", $.event.special.touchclick.touchend);
             }
         },
@@ -23,6 +24,7 @@
                 $(this).off("touchend", $.event.special.touchclick.touchend);
             } else {
                 $(this).off("mousedown", $.event.special.touchclick.touchstart);
+                $(this).off("mousemove", $.event.special.touchclick.touchmove);
                 $(this).off("mouseup", $.event.special.touchclick.touchend);
             }
         },
