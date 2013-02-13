@@ -9,8 +9,11 @@
                 $el.on("touchend", $.event.special.touchclick.touchend);
             } else {
                 $el.on("mousedown", $.event.special.touchclick.touchstart);
-                $el.on("mousemove", $.event.special.touchclick.touchmove);
                 $el.on("mouseup", $.event.special.touchclick.touchend);
+
+                if (!window.navigator.msPointerEnabled) {
+                    $el.on("mousemove", $.event.special.touchclick.touchmove);
+                }
             }
         },
 
@@ -28,29 +31,32 @@
                 $el.off("touchend", $.event.special.touchclick.touchend);
             } else {
                 $el.off("mousedown", $.event.special.touchclick.touchstart);
-                $el.off("mousemove", $.event.special.touchclick.touchmove);
                 $el.off("mouseup", $.event.special.touchclick.touchend);
+
+                if (!window.navigator.msPointerEnabled) {
+                    $el.off("mousemove", $.event.special.touchclick.touchmove);
+                }
             }
         },
 
         touchstart: function () {
             var $el = $(this);
 
-            $el.data("moved", false);
+            $el.data("touchclick-moved", false);
             $el.addClass("touchactive");
         },
 
         touchmove: function () {
             var $el = $(this);
 
-            $el.data("moved", true);
+            $el.data("touchclick-moved", true);
             $el.removeClass("touchactive");
         },
 
         touchend: function () {
             var $el = $(this);
 
-            if (!$el.data("moved")) {
+            if (!$el.data("touchclick-moved")) {
                 $.event.special.touchclick.click.apply(this, arguments);
             }
             $el.removeClass("touchactive");
