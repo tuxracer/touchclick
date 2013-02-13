@@ -3,32 +3,38 @@
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<style>
 		* {
 		    -webkit-touch-callout: none;
 		    -webkit-tap-highlight-color: rgba(0,0,0,0);
 		    -webkit-user-select: none;
+		    -ms-user-select: none;
+		}
+
+		body {
+			background: #D0D0D0;
 		}
 
 		div {
 		    font-family: "Helvetica Neue", sans-serif;
 		    font-size: 14px;
 		    line-height: 50px;
-		    color: #333;
+		    color: #313131;
 		    width: 250px;
 		    height: 50px;
 		    padding: 10px;
 		    border: 1px solid #888;
 		    text-align: center;
 		    margin-bottom: 10px;
-		    background: -webkit-linear-gradient(top, #dddddd 0%,#aaaaaa 100%);
+		    background: #eee;
 		    box-shadow: 0 0 10px rgba(0,0,0,0.25);
 		    cursor: default;
 		}
 
 		div.touchactive {
-		    background: -webkit-linear-gradient(top, #aaaaaa 0%,#dddddd 100%);
+			color: #F0F0F0;
+		    background: #33B5E5;
 		}
 	</style>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
