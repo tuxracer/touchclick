@@ -1,14 +1,16 @@
 (function ($) {
     $.event.special.touchclick = {
         setup: function () {
+            var $el = $(this);
+
             if (typeof window.ontouchstart !== "undefined") {
-                $(this).on("touchstart", $.event.special.touchclick.touchstart);
-                $(this).on("touchmove", $.event.special.touchclick.touchmove);
-                $(this).on("touchend", $.event.special.touchclick.touchend);
+                $el.on("touchstart", $.event.special.touchclick.touchstart);
+                $el.on("touchmove", $.event.special.touchclick.touchmove);
+                $el.on("touchend", $.event.special.touchclick.touchend);
             } else {
-                $(this).on("mousedown", $.event.special.touchclick.touchstart);
-                $(this).on("mousemove", $.event.special.touchclick.touchmove);
-                $(this).on("mouseup", $.event.special.touchclick.touchend);
+                $el.on("mousedown", $.event.special.touchclick.touchstart);
+                $el.on("mousemove", $.event.special.touchclick.touchmove);
+                $el.on("mouseup", $.event.special.touchclick.touchend);
             }
         },
 
@@ -18,32 +20,40 @@
         },
 
         teardown: function () {
+            var $el = $(this);
+
             if (typeof window.ontouchstart !== "undefined") {
-                $(this).off("touchstart", $.event.special.touchclick.touchstart);
-                $(this).off("touchmove", $.event.special.touchclick.touchmove);
-                $(this).off("touchend", $.event.special.touchclick.touchend);
+                $el.off("touchstart", $.event.special.touchclick.touchstart);
+                $el.off("touchmove", $.event.special.touchclick.touchmove);
+                $el.off("touchend", $.event.special.touchclick.touchend);
             } else {
-                $(this).off("mousedown", $.event.special.touchclick.touchstart);
-                $(this).off("mousemove", $.event.special.touchclick.touchmove);
-                $(this).off("mouseup", $.event.special.touchclick.touchend);
+                $el.off("mousedown", $.event.special.touchclick.touchstart);
+                $el.off("mousemove", $.event.special.touchclick.touchmove);
+                $el.off("mouseup", $.event.special.touchclick.touchend);
             }
         },
 
         touchstart: function () {
-            this.moved = false;
-            $(this).addClass("touchactive");
+            var $el = $(this);
+
+            $el.data("moved", false);
+            $el.addClass("touchactive");
         },
 
         touchmove: function () {
-            this.moved = true;
-            $(this).removeClass("touchactive");
+            var $el = $(this);
+
+            $el.data("moved", true);
+            $el.removeClass("touchactive");
         },
 
         touchend: function () {
-            if (!this.moved) {
+            var $el = $(this);
+
+            if (!$el.data("moved")) {
                 $.event.special.touchclick.click.apply(this, arguments);
             }
-            $(this).removeClass("touchactive");
+            $el.removeClass("touchactive");
         }
     };
 })(jQuery);
