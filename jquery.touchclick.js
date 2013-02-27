@@ -2,30 +2,47 @@
     var activeClass = "touchactive",
         touchstart,
         touchmove,
-        touchend;
+        touchend,
+        timestamp;
+
+    timestamp = function () {
+        return Math.round((new Date()).getTime() / 1000);
+    };
 
     touchstart = function (e) {
-        var $targetEl = $(e.target);
+        var $targetEl = $(e.target),
+            currentTimestamp = timestamp(),
+            lastTimestamp = $targetEl.data("touchclick-last-touch"),
+            difference = currentTimestamp - lastTimestamp;
 
-        $targetEl.data("touchclick-moved", false);
-        $targetEl.addClass(activeClass);
+        if (lastTimestamp && difference < 3 && e.type === "mousedown") {
+            $targetEl.data("touchclick-disabled", true);
+        } else {
+            $targetEl.data("touchclick-disabled", false);
+            $targetEl.addClass(activeClass);
+        }
+
+        if (e.type === "touchstart" || e.type === "MSPointerDown") {
+            $targetEl.data("touchclick-last-touch", currentTimestamp);
+        }
     };
 
     touchmove = function (e) {
         var $targetEl = $(e.target);
 
-        $targetEl.data("touchclick-moved", true);
+        $targetEl.data("touchclick-disabled", true);
         $targetEl.removeClass(activeClass);
     };
 
     touchend = function (e) {
         var $targetEl = $(e.target);
 
-        if (!$targetEl.data("touchclick-moved")) {
+        if (!$targetEl.data("touchclick-disabled")) {
             e.type = "touchclick";
             $.event.dispatch.call(this, e);
         }
 
+        $targetEl.data("touchclick-disabled", false);
         $targetEl.removeClass(activeClass);
     };
 
@@ -33,34 +50,26 @@
         setup: function () {
             var $el = $(this);
 
-            if (typeof window.ontouchstart !== "undefined") {
-                $el.on("touchstart", touchstart);
-                $el.on("touchmove", touchmove);
-                $el.on("touchend", touchend);
+            if (window.navigator.msPointerEnabled) {
+                $el.on("MSPointerDown", touchstart);
+                $el.on("MSPointerUp", touchend);
             } else {
-                $el.on("mousedown", touchstart);
-                $el.on("mouseup", touchend);
-
-                if (!window.navigator.msPointerEnabled) {
-                    $el.on("mousemove", touchmove);
-                }
+                $el.on("touchstart mousedown", touchstart);
+                $el.on("touchmove mousemove", touchmove);
+                $el.on("touchend mouseup", touchend);
             }
         },
 
         teardown: function () {
             var $el = $(this);
 
-            if (typeof window.ontouchstart !== "undefined") {
-                $el.off("touchstart", touchstart);
-                $el.off("touchmove", touchmove);
-                $el.off("touchend", touchend);
+            if (window.navigator.msPointerEnabled) {
+                $el.off("MSPointerDown", touchstart);
+                $el.off("MSPointerUp", touchend);
             } else {
-                $el.off("mousedown", touchstart);
-                $el.off("mouseup", touchend);
-
-                if (!window.navigator.msPointerEnabled) {
-                    $el.off("mousemove", touchmove);
-                }
+                $el.off("touchstart mousedown", touchstart);
+                $el.off("touchmove mousemove", touchmove);
+                $el.off("touchend mouseup", touchend);
             }
         }
     };
