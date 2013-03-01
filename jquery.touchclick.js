@@ -66,7 +66,7 @@
                 $el.on("MSPointerUp", touchend);
             } else {
                 $el.on("touchstart mousedown", touchstart);
-                $el.on("touchmove mousemove", touchmove);
+                $el.on("touchmove mouseout", touchmove);
                 $el.on("touchend mouseup", touchend);
             }
         },
@@ -79,7 +79,7 @@
                 $el.off("MSPointerUp", touchend);
             } else {
                 $el.off("touchstart mousedown", touchstart);
-                $el.off("touchmove mousemove", touchmove);
+                $el.off("touchmove mouseout", touchmove);
                 $el.off("touchend mouseup", touchend);
             }
         }
