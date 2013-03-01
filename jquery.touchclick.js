@@ -5,45 +5,56 @@
         touchend,
         timestamp;
 
+    getTouchclickEl = function (target) {
+        var $targetEl = $(target),
+            $touchclickEl = $targetEl.closest("*[data-touchclick='true']");
+
+        if ($touchclickEl.length) {
+            return $touchclickEl;
+        }
+
+        return $targetEl;
+    };
+
     timestamp = function () {
         return Math.round((new Date()).getTime() / 1000);
     };
 
     touchstart = function (e) {
-        var $targetEl = $(e.target),
+        var $touchclickEl = getTouchclickEl(e.target),
             currentTimestamp = timestamp(),
-            lastTimestamp = $targetEl.data("touchclick-last-touch"),
+            lastTimestamp = $touchclickEl.data("touchclick-last-touch"),
             difference = currentTimestamp - lastTimestamp;
 
         if (lastTimestamp && difference < 3 && e.type === "mousedown") {
-            $targetEl.data("touchclick-disabled", true);
+            $touchclickEl.data("touchclick-disabled", true);
         } else {
-            $targetEl.data("touchclick-disabled", false);
-            $targetEl.addClass(activeClass);
+            $touchclickEl.data("touchclick-disabled", false);
+            $touchclickEl.addClass(activeClass);
         }
 
         if (e.type === "touchstart" || e.type === "MSPointerDown") {
-            $targetEl.data("touchclick-last-touch", currentTimestamp);
+            $touchclickEl.data("touchclick-last-touch", currentTimestamp);
         }
     };
 
     touchmove = function (e) {
-        var $targetEl = $(e.target);
+        var $touchclickEl = getTouchclickEl(e.target);
 
-        $targetEl.data("touchclick-disabled", true);
-        $targetEl.removeClass(activeClass);
+        $touchclickEl.data("touchclick-disabled", true);
+        $touchclickEl.removeClass(activeClass);
     };
 
     touchend = function (e) {
-        var $targetEl = $(e.target);
+        var $touchclickEl = getTouchclickEl(e.target);
 
-        if (!$targetEl.data("touchclick-disabled")) {
+        if (!$touchclickEl.data("touchclick-disabled")) {
             e.type = "touchclick";
             $.event.dispatch.call(this, e);
         }
 
-        $targetEl.data("touchclick-disabled", false);
-        $targetEl.removeClass(activeClass);
+        $touchclickEl.data("touchclick-disabled", false);
+        $touchclickEl.removeClass(activeClass);
     };
 
     $.event.special.touchclick = {

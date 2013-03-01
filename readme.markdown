@@ -12,8 +12,8 @@ This plugin aims to alleviate these problems by providing immediate *visual* fee
 Instructions
 -------------
 
-1. Include jquery.touchclick.js after jQuery has loaded
-2. Define a .touchactive style for the element so that touchscreen users receive immediate visual feedback the instant their finger touches the screen
+1. Define a .touchactive style for the element that will be applied immediately when the user touches the screen
+2. For delegated events add data-touchclick="true" to the element you want the touchactive class to be added to
 3. Listen for the "touchclick" event
 
 Derek Petersen
