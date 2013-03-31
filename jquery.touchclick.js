@@ -64,7 +64,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         var $touchclickEl = getTouchclickEl(e.target);
 
         if (!$touchclickEl.data("touchclick-disabled")) {
-            e.type = "touchclick";
+            e.type = "click";
             $.event.dispatch.call(this, e);
         }
 
@@ -72,31 +72,33 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         $touchclickEl.removeClass(activeClass);
     };
 
-    $.event.special.touchclick = {
-        setup: function () {
-            var $el = $(this);
+    if ('ontouchstart' in document.documentElement) {
+        $.event.special.click = {
+            setup: function () {
+                var $el = $(this);
 
-            if (window.navigator.msPointerEnabled) {
-                $el.on("MSPointerDown", touchstart);
-                $el.on("MSPointerUp", touchend);
-            } else {
-                $el.on("touchstart mousedown", touchstart);
-                $el.on("touchmove mouseout", touchmove);
-                $el.on("touchend mouseup", touchend);
+                if (window.navigator.msPointerEnabled) {
+                    $el.on("MSPointerDown", touchstart);
+                    $el.on("MSPointerUp", touchend);
+                } else {
+                    $el.on("touchstart mousedown", touchstart);
+                    $el.on("touchmove mouseout", touchmove);
+                    $el.on("touchend mouseup", touchend);
+                }
+            },
+
+            teardown: function () {
+                var $el = $(this);
+
+                if (window.navigator.msPointerEnabled) {
+                    $el.off("MSPointerDown", touchstart);
+                    $el.off("MSPointerUp", touchend);
+                } else {
+                    $el.off("touchstart mousedown", touchstart);
+                    $el.off("touchmove mouseout", touchmove);
+                    $el.off("touchend mouseup", touchend);
+                }
             }
-        },
-
-        teardown: function () {
-            var $el = $(this);
-
-            if (window.navigator.msPointerEnabled) {
-                $el.off("MSPointerDown", touchstart);
-                $el.off("MSPointerUp", touchend);
-            } else {
-                $el.off("touchstart mousedown", touchstart);
-                $el.off("touchmove mouseout", touchmove);
-                $el.off("touchend mouseup", touchend);
-            }
-        }
-    };
+        };
+    }
 }));

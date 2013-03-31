@@ -44,26 +44,12 @@
     <script src="jquery.touchclick.js"></script>
 </head>
 <body>
-    <div id="best" data-touchclick="true"></div>
-    <div id="better"></div>
-    <div id="bad"></div>
+    <div id="only"></div>
 
     <script>
         $(function() {
-            var random = function() {
-                return Math.floor((Math.random()*100)+1);
-            };
-
-            $("#best").on("touchclick", function () {
-                $(this).html("touchclick " + random());
-            });
-
-            $("#better").on("touchend MSPointerUp", function () {
-                $(this).html("touchend " + random());
-            });
-
-            $("#bad").on("click", function () {
-                $(this).html("click " + random());
+            $("#only").on("click", function (e) {
+                $(this).html("touchclick " + e.timeStamp);
             });
         });
     </script>
