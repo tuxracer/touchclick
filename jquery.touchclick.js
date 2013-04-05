@@ -6,9 +6,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 (function (factory) {
-    if (typeof define === 'function' && define.amd) {
+    if (typeof define === "function" && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
+        define(["jquery"], factory);
     } else {
         // Browser globals
         factory(jQuery);
@@ -41,6 +41,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             lastTimestamp = $touchclickEl.data("touchclick-last-touch"),
             difference = currentTimestamp - lastTimestamp;
 
+        // Support devices with both touch and mouse (e.g. Windows 8, Chromebook Pixel)
         if (lastTimestamp && difference < 3 && e.type === "mousedown") {
             $touchclickEl.data("touchclick-disabled", true);
         } else {
