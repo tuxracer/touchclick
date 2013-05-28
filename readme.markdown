@@ -1,4 +1,4 @@
-jQuery TouchClick
+touchclick
 ==================
 
 This is a small jQuery plugin to enable binding to either the touch events or the click event depending on what's available for the given platform.
