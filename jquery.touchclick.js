@@ -6,7 +6,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 (function (factory) {
-    if (typeof define === "function" && define.amd) {
+    if (typeof exports === "object") {
+        // Node/CommonJS
+        factory(require("jquery"));
+    } else if (typeof define === "function" && define.amd) {
         // AMD. Register as an anonymous module.
         define(["jquery"], factory);
     } else {
