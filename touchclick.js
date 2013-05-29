@@ -1,5 +1,5 @@
 /*!
-Copyright (c) 2013 Derek Petersen https://github.com/tuxracer/jquery-touchclick
+Copyright (c) 2013 Derek Petersen https://github.com/tuxracer/touchclick
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -21,7 +21,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         touchstart,
         touchmove,
         touchend,
-        timestamp;
+        timestamp,
+        events;
 
     getTouchclickEl = function (target) {
         var $targetEl = $(target),
@@ -76,31 +77,26 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         $touchclickEl.removeClass(activeClass);
     };
 
+    events = function (type) {
+        var $el = $(this);
+
+        if (window.navigator.msPointerEnabled) {
+            $el[type]("MSPointerDown", touchstart);
+            $el[type]("MSPointerUp", touchend);
+        } else {
+            $el[type]("touchstart mousedown", touchstart);
+            $el[type]("touchmove mouseout", touchmove);
+            $el[type]("touchend mouseup", touchend);
+        }
+    };
+
     $.event.special.touchclick = {
         setup: function () {
-            var $el = $(this);
-
-            if (window.navigator.msPointerEnabled) {
-                $el.on("MSPointerDown", touchstart);
-                $el.on("MSPointerUp", touchend);
-            } else {
-                $el.on("touchstart mousedown", touchstart);
-                $el.on("touchmove mouseout", touchmove);
-                $el.on("touchend mouseup", touchend);
-            }
+            events.call(this, "on");
         },
 
         teardown: function () {
-            var $el = $(this);
-
-            if (window.navigator.msPointerEnabled) {
-                $el.off("MSPointerDown", touchstart);
-                $el.off("MSPointerUp", touchend);
-            } else {
-                $el.off("touchstart mousedown", touchstart);
-                $el.off("touchmove mouseout", touchmove);
-                $el.off("touchend mouseup", touchend);
-            }
+            events.call(this, "off");
         }
     };
 }));
