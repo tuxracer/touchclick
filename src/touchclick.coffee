@@ -26,12 +26,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     
     return $targetEl
   
-  timestamp = ->
-    Math.round new Date().getTime() / 1000
-  
   touchstart = (e) ->
     $touchclickEl = getTouchclickEl e.target
-    currentTimestamp = timestamp()
+    currentTimestamp = Math.round (new Date()).getTime() / 1000
     lastTimestamp = $touchclickEl.data "touchclick-last-touch"
     difference = currentTimestamp - lastTimestamp
     
