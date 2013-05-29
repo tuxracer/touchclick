@@ -21,7 +21,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         touchstart,
         touchmove,
         touchend,
-        timestamp,
         events;
 
     getTouchclickEl = function (target) {
@@ -35,13 +34,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         return $targetEl;
     };
 
-    timestamp = function () {
-        return Math.round((new Date()).getTime() / 1000);
-    };
-
     touchstart = function (e) {
         var $touchclickEl = getTouchclickEl(e.target),
-            currentTimestamp = timestamp(),
+            currentTimestamp = Math.round((new Date()).getTime() / 1000),
             lastTimestamp = $touchclickEl.data("touchclick-last-touch"),
             difference = currentTimestamp - lastTimestamp;
 
