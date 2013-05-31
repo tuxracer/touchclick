@@ -51,7 +51,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   touchend = (e) ->
     $touchclickEl = getTouchclickEl e.target
     
-    if !$touchclickEl.data "touchclick-disabled"
+    unless $touchclickEl.data "touchclick-disabled"
       e.type = "touchclick"
       $.event.dispatch.call this, e
     
