@@ -21,10 +21,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     $targetEl = $ target
     $touchclickEl = $targetEl.closest "*[data-touchclick='true']"
     
-    if ($touchclickEl.length)
-      return $touchclickEl
-    
-    return $targetEl
+    if $touchclickEl.length
+      $touchclickEl
+    else
+      $targetEl
   
   touchstart = (e) ->
     $touchclickEl = getTouchclickEl e.target
@@ -59,7 +59,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     $touchclickEl.removeClass activeClass
 
   events = (type) ->
-    $el = $(this)
+    $el = $ this
     
     if window.navigator.msPointerEnabled
       $el[type] "MSPointerDown", touchstart
