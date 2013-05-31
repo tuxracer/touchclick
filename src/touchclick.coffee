@@ -69,10 +69,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       $el[type] "touchmove mouseout", touchmove
       $el[type] "touchend mouseup", touchend
 
-  $.event.special.touchclick = {
+  $.event.special.touchclick =
     setup: ->
       events.call this,"on"
     
     teardown: ->
       events.call this,"off"
-  }
