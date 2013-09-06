@@ -17,6 +17,25 @@ describe 'touchclick', ->
           @$el.trigger 'mousedown'
           expect(@$el.hasClass 'touchactive').to.be.true
 
+        describe 'when data-touchclick="true" is on its parent element', ->
+          beforeEach ->
+            @$parent = $('<div />')
+            .attr('data-touchclick', true)
+            .append(@$el)
+
+            @$el
+            .on('touchclick', @spy)
+            .trigger('mousedown')
+
+          afterEach ->
+            @$parent.remove()
+
+          it 'should not have the "touchactive" class', ->
+            expect(@$el.hasClass 'touchactive').to.be.false
+
+          it 'should have a parent element with the "touchclick" active class', ->
+            expect(@$el.closest('.touchactive').length).to.equal 1
+
         describe 'then mouseout', ->
           beforeEach ->
             @$el
@@ -45,6 +64,25 @@ describe 'touchclick', ->
         it 'should have the "touchactive" class', ->
           @$el.trigger 'touchstart'
           expect(@$el.hasClass 'touchactive').to.be.true
+
+        describe 'when data-touchclick="true" is on its parent element', ->
+          beforeEach ->
+            @$parent = $('<div />')
+            .attr('data-touchclick', true)
+            .append(@$el)
+
+            @$el
+            .on('touchclick', @spy)
+            .trigger('touchstart')
+
+          afterEach ->
+            @$parent.remove()
+
+          it 'should not have the "touchactive" class', ->
+            expect(@$el.hasClass 'touchactive').to.be.false
+
+          it 'should have a parent element with the "touchclick" active class', ->
+            expect(@$el.closest('.touchactive').length).to.equal 1
 
         describe 'then mousedown, then mouseup, then touchend', ->
           beforeEach ->
