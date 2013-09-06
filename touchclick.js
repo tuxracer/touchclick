@@ -6,11 +6,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 (function(factory) {
-  if (typeof exports === "object") {
+  var e;
+  try {
     return factory(require("jquery"));
-  } else if (typeof define === "function" && define.amd) {
-    return define(["jquery"], factory);
-  } else {
+  } catch (_error) {
+    e = _error;
     return factory(jQuery);
   }
 })(function($) {
