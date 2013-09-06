@@ -16,11 +16,11 @@
 
         body {
             background: #D0D0D0;
+            font-family: "Helvetica Neue", sans-serif;
+            font-size: 14px;
         }
 
         div {
-            font-family: "Helvetica Neue", sans-serif;
-            font-size: 14px;
             line-height: 50px;
             color: #313131;
             width: 250px;
@@ -40,7 +40,7 @@
             background: #33B5E5;
         }
     </style>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="../node_modules/jquery/tmp/jquery.js"></script>
     <script src="touchclick.js"></script>
 </head>
 <body>
@@ -49,6 +49,10 @@
     <div id="bad"></div>
 
     <script>
+        if (typeof $ === 'undefined') {
+            document.querySelector('body').innerHTML = "jQuery not found. Try running `npm install`";
+        }
+
         $(function() {
             var random = function() {
                 return Math.floor((Math.random()*100)+1);
