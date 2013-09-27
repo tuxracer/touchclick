@@ -3,13 +3,21 @@ module.exports = (grunt) ->
     coffee:
       dist:
         files:
-          'touchclick.js': 'src/touchclick.coffee'
+          'tmp/touchclick.js': 'src/touchclick.coffee'
         options:
           bare: true
       test:
         files:
           'tmp/touchclick.js': 'src/touchclick.coffee'
           'tmp/spec/test.js': 'test/spec/test.coffee'
+
+    uglify:
+      dist:
+        options:
+          report: 'min'
+          preserveComments: 'some'
+        src: 'tmp/touchclick.js'
+        dest: 'touchclick.js'
 
     clean:
       test: ['tmp']
@@ -33,7 +41,7 @@ module.exports = (grunt) ->
 
   # Shortcuts
   grunt.registerTask 'test', ['clean', 'coffee:test', 'mocha']
-  grunt.registerTask 'b', ['test', 'coffee:dist', 'clean']
+  grunt.registerTask 'b', ['test', 'coffee:dist', 'uglify', 'clean']
 
   # Default task
   grunt.registerTask 'default', 'b'
