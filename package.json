@@ -21,8 +21,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "jquery": ">=1.8",
-    "grunt-contrib-uglify": "~0.2.4"
+    "jquery": ">=1.8"
   },
   "keywords": [
     "touch",
@@ -40,6 +39,7 @@
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-clean": "~0.5.0",
     "coffee-script": "~1.6.3",
-    "grunt-mocha": "~0.4.1"
+    "grunt-mocha": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.4"
   }
 }

@@ -13,6 +13,9 @@ Copyright (c) 2013 Derek Petersen https://github.com/tuxracer/touchclick MIT Lic
 
   getTouchclickEl = (target) ->
     $targetEl = $ target
+    # For delegated events you can optionally provide an element
+    # that will have the active style added when touch is active
+    # by adding data-touchclick="true"
     $touchclickEl = $targetEl.closest '*[data-touchclick="true"]'
 
     if $touchclickEl.length
