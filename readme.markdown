@@ -13,8 +13,8 @@ Instructions
 -------------
 
 1. Define a .touchactive style for the element that will be applied immediately when the user touches the screen
-2. For delegated events add data-touchclick="true" to the element you want the touchactive class to be added to
-3. Listen for the "touchclick" event
+2. (Optional) For delegated events add data-touchclick="true" to the element you want the touchactive class to be added to
+3. Listen for the "touchclick" event where you would normally listen for "click" or "touchend"
 
 Derek Petersen
 
