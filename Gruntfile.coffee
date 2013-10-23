@@ -1,15 +1,16 @@
 module.exports = (grunt) ->
   grunt.initConfig
     coffee:
+      test:
+        files:
+          'tmp/spec/test.js': 'test/spec/test.coffee'
+
+    browserify:
       dist:
         files:
           'tmp/touchclick.js': 'src/touchclick.coffee'
         options:
-          bare: true
-      test:
-        files:
-          'tmp/touchclick.js': 'src/touchclick.coffee'
-          'tmp/spec/test.js': 'test/spec/test.coffee'
+          transform: ['coffeeify']
 
     uglify:
       dist:
@@ -40,8 +41,8 @@ module.exports = (grunt) ->
   .forEach(grunt.loadTasks)
 
   # Shortcuts
-  grunt.registerTask 'test', ['clean', 'coffee:test', 'mocha']
-  grunt.registerTask 'b', ['test', 'coffee:dist', 'uglify', 'clean']
+  grunt.registerTask 'test', ['clean', 'browserify', 'coffee', 'mocha']
+  grunt.registerTask 'b', ['test', 'uglify', 'clean']
 
   # Default task
   grunt.registerTask 'default', 'b'
