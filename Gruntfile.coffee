@@ -11,6 +11,7 @@ module.exports = (grunt) ->
           'tmp/touchclick.js': 'src/touchclick.coffee'
         options:
           transform: ['coffeeify']
+          ignore: ['jquery']
 
     uglify:
       dist:

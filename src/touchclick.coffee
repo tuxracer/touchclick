@@ -2,6 +2,8 @@
 Copyright (c) 2013 Derek Petersen https://github.com/tuxracer/touchclick MIT License
 ###
 
+$ = if typeof jQuery is 'function' then jQuery else require 'jquery'
+
 activeClass = 'touchactive'
 
 getTouchclickEl = (target) ->
