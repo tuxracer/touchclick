@@ -20,7 +20,7 @@
   "scripts": {
     "test": "grunt test"
   },
-  "dependencies": {
+  "peerDependencies": {
     "jquery": ">=1.8"
   },
   "keywords": [
@@ -43,6 +43,7 @@
     "grunt-contrib-uglify": "~0.2.4",
     "browserify": "~2.34.3",
     "grunt-browserify": "~1.2.9",
-    "coffeeify": "~0.5.2"
+    "coffeeify": "~0.5.2",
+    "jquery": ">=1.8"
   }
 }
