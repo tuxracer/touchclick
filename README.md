@@ -4,15 +4,16 @@ touchclick
 This is a small jquery plugin that allows you to easily bind to the touch or click events depending on what's available for the given platform. Unlike similar scripts, this also provides *immediate* visual feedback on touch platforms -- just as native apps do.
 
 ## Getting Started
+1. Include the touchclick.js file on the page after jquery, or require it with [browserify](https://github.com/substack/node-browserify).
 
-1. Bind to the **touchclick** event where you would have otherwise used click or touchend
+2. Bind to the **touchclick** event where you would have otherwise used click or touchend
 ```javascript
 	$(".menu-btn").on("touchclick", function () {
 		console.log("अनित्य");
 	});
 ```
 
-2. Define a **.touchactive** style for the given element
+3. Define a **.touchactive** style for the given element
 ```css
 	.menu.btn.touchactive {
 		color: #eee;
@@ -20,7 +21,15 @@ This is a small jquery plugin that allows you to easily bind to the touch or cli
 	}
 ```
 
-3. (Optional) For delegated events add **data-touchclick="true"** to the elemnt you want the touchactive class to be added to.
+4. Disable the default touch overlay so it doesn't interfere with your custom .touchactive style
+```css
+	* {
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+```
+
+5. (Optional) For delegated events add **data-touchclick="true"** to the element you want the touchactive class to be added to.
 ```html
 	<div class="menu btn" data-touchclick="true">Menu</div>
 ```
@@ -32,6 +41,8 @@ Binding to touchend or using a script such as [fastclick](https://github.com/ftl
 ### Bind to touchend + provide a :hover style ###
 Binding to touchend or using [fastclick](https://github.com/ftlabs/fastclick) will remove the delay and provide some visual feedback. However, unlike touchclick and most native apps, when the user removes their finger from the element the :hover style sticks. While subtle, this still leaves web apps with a somewhat laggy feel.
 
+### Rely on tap-highlight-color ###
+Some browsers will add a large translucent overlay when items are tapped. However you do not have control over the exact style of an actively pressed element. This typically ends up looking a bit jenky.
 
 ## License
 Copyright (c) 2014, Derek Petersen
