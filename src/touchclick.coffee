@@ -45,9 +45,10 @@ touchend = (e) ->
 
   if $touchclickEl.hasClass(activeClass) and not ignoreEvent e
     e.type = 'touchclick'
-    $touchclickEl.trigger e
 
-    $touchclickEl.removeClass activeClass
+    $touchclickEl
+    .trigger(e)
+    .removeClass(activeClass)
 
 events = (type) ->
   $el = $ this
