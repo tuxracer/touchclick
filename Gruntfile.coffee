@@ -33,8 +33,6 @@ module.exports = (grunt) ->
           reporter: 'Nyan'
           run: true
           timeout: 10000
-          mocha:
-            ignoreLeaks: false
 
   # Load installed tasks
   grunt.file.glob
