@@ -1,6 +1,6 @@
 {
   "name": "touchclick",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Provide immediate native-like visual feedback on touch",
   "homepage": "https://github.com/tuxracer/touchclick",
   "author": {
