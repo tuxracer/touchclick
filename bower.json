@@ -9,6 +9,7 @@
   "ignore": [
     "src",
     "test",
+    "demos",
     ".*",
     "Gruntfile.coffee",
     "package.json"
