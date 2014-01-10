@@ -5,8 +5,10 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
 
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     <style>
         * {
             -webkit-touch-callout: none;
@@ -14,7 +16,7 @@
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
-            /*box-sizing: border-box;*/
+            box-sizing: border-box;
         }
 
         html,body {
@@ -30,32 +32,17 @@
             width: -webkit-calc(100% + 200px);
             overflow: hidden;
 
-            -webkit-transform: translateX(-200px);
-            transform: translateX(-200px);
+            -webkit-transform: translate3d(-200px, 0, 0);
+            transform: translate3d(-200px, 0, 0);
 
             -webkit-transition: all 0.3s;
             transition: all 0.3s;
         }
 
         body.menu-open {
-            -webkit-transform: translateX(0);
-            transform: translateX(0);
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
         }
-
-/*        div {
-            line-height: 50px;
-            color: #313131;
-            width: 250px;
-            height: 50px;
-            padding: 10px;
-            border: 1px solid #888;
-            text-align: center;
-            margin-bottom: 10px;
-            background: #eee;
-            box-shadow: 0 0 10px rgba(0,0,0,0.25);
-            cursor: default;
-            margin: 20px auto;
-        }*/
 
         div.touchactive {
             color: #F0F0F0;
@@ -68,6 +55,7 @@
             height: 100%;
             width: 200px;
             float: left;
+            margin-right: 15px;
         }
 
         #menu ul {
@@ -78,28 +66,36 @@
 
         #menu li {
             background: #333;
-            font-weight: 300;
             display: block;
             padding: 15px;
+            cursor: pointer;
+        }
+
+        #menu li.touchactive {
+            background: #222;
+            text-shadow: 0 0 20px #fff;
         }
 
         #main {
-            position: relative;
-            left: 15px;
             padding-top: 10px;
         }
 
         #menu-btn {
             padding: 0;
-            background: #000;
-            color: #fff;
+            background: #333;
+            color: #eee;
             overflow: hidden;
-            width: 48px;
-            height: 48px;
-            line-height: 40px;
+            width: 64px;
+            height: 64px;
+            line-height: 60px;
+            font-size: 64px;
             text-align: center;
-            font-size: 48px;
             cursor: pointer;
+        }
+
+        #menu-btn.touchactive {
+            background: #888;
+            color: #333;
         }
 
         #content {
@@ -107,22 +103,22 @@
             font-size: 24px;
         }
     </style>
-    <script src="../node_modules/jquery/tmp/jquery.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
     <script src="../touchclick.js"></script>
 </head>
 <body>
     <div id="menu">
         <ul>
-            <li>Home</li>
+            <li class="blah">Home</li>
             <li>New Story</li>
             <li>Drafts</li>
             <li>Collections</li>
         </ul>
     </div>
     <div id="main">
-        <div id="menu-btn">&equiv;</div>
+        <div id="menu-btn">=</div>
         <div id="content">
-            Stuff on the homepage
+            Choose some menu items
         </div>
     </div>
 
@@ -132,20 +128,8 @@
         }
 
         $(function() {
-            var random = function() {
-                return Math.floor((Math.random()*100)+1);
-            };
-
-            $("#best").on("touchclick", function () {
-                $(this).html("touchclick " + random());
-            });
-
-            $("#better").on("touchend MSPointerUp", function () {
-                $(this).html("touchend " + random());
-            });
-
-            $("#bad").on("click", function () {
-                $(this).html("click " + random());
+            $("#menu-btn, li").on("touchclick", function (e) {
+                $("body").toggleClass("menu-open");
             });
         });
     </script>
