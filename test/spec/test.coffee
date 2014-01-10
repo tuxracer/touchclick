@@ -124,8 +124,8 @@ describe 'touchclick', ->
           it 'should not have the "touchactive" class', ->
             expect(@$el.hasClass 'touchactive').to.be.false
 
-          it 'should execute the callback twice', ->
-            expect(@spy.calledTwice).to.be.true
+          it 'should execute the callback once', ->
+            expect(@spy.calledOnce).to.be.true
 
         describe 'then touchmove', ->
           beforeEach ->

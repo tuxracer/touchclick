@@ -6,6 +6,22 @@ $ = if typeof jQuery is 'function' then jQuery else require 'jquery'
 
 activeClass = 'touchactive'
 
+# Store a timestamp of when the last touch event occurred
+lastTouched = 0
+
+# Support devices with both touch and mouse (e.g. Windows 8, Chromebook Pixel)
+ignoreEvent = (e) ->
+  currentTimestamp = Math.round (new Date()).getTime() / 1000
+  secondsSinceTouch = currentTimestamp - lastTouched
+
+  if e.type.match 'touchstart|touchmove|touchend'
+    lastTouched = currentTimestamp
+
+  if secondsSinceTouch < 3 and e.type.match 'mouse'
+    true
+  else
+    false
+
 getTouchclickEl = (target) ->
   $targetEl = $ target
   # For delegated events you can optionally provide an element
@@ -19,36 +35,19 @@ getTouchclickEl = (target) ->
     $targetEl
 
 touchstart = (e) ->
-  $touchclickEl = getTouchclickEl e.target
-  currentTimestamp = Math.round (new Date()).getTime() / 1000
-  lastTimestamp = $touchclickEl.data 'touchclick-last-touch'
-  difference = currentTimestamp - lastTimestamp
-
-  # Support devices with both touch and mouse (e.g. Windows 8, Chromebook Pixel)
-  if lastTimestamp and difference < 3 and e.type is 'mousedown'
-    $touchclickEl.data 'touchclick-disabled', true
-  else
-    $touchclickEl.data 'touchclick-disabled', false
-    $touchclickEl.addClass activeClass
-
-  if e.type is 'touchstart' or e.type is 'MSPointerDown'
-    $touchclickEl.data 'touchclick-last-touch', currentTimestamp
+  getTouchclickEl(e.target).addClass(activeClass) unless ignoreEvent e
 
 touchmove = (e) ->
-  $touchclickEl = getTouchclickEl e.target
-
-  $touchclickEl.data 'touchclick-disabled', true
-  $touchclickEl.removeClass activeClass
+  getTouchclickEl(e.target).removeClass(activeClass)
 
 touchend = (e) ->
   $touchclickEl = getTouchclickEl e.target
 
-  unless $touchclickEl.data 'touchclick-disabled'
+  if $touchclickEl.hasClass(activeClass) and not ignoreEvent e
     e.type = 'touchclick'
-    $.event.dispatch.call this, e
+    $touchclickEl.trigger e
 
-  $touchclickEl.data 'touchclick-disabled', false
-  $touchclickEl.removeClass activeClass
+    $touchclickEl.removeClass activeClass
 
 events = (type) ->
   $el = $ this
@@ -63,7 +62,7 @@ events = (type) ->
 
 $.event.special.touchclick =
   setup: ->
-    events.call this,'on'
+    events.call this, 'on'
 
   teardown: ->
-    events.call this,'off'
+    events.call this, 'off'
