@@ -21,6 +21,13 @@ module.exports = (grunt) ->
         src: 'tmp/touchclick.js'
         dest: 'touchclick.js'
 
+    copy:
+      full:
+        files: [
+          src: 'tmp/touchclick.js'
+          dest: 'touchclick.js'
+        ]
+
     clean:
       test: ['tmp']
 
@@ -42,6 +49,7 @@ module.exports = (grunt) ->
   # Shortcuts
   grunt.registerTask 'test', ['clean', 'browserify', 'coffee', 'mocha']
   grunt.registerTask 'b', ['test', 'uglify', 'clean']
+  grunt.registerTask 'debug', ['clean', 'browserify', 'copy']
 
   # Default task
   grunt.registerTask 'default', 'b'
