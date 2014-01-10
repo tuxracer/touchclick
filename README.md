@@ -1,21 +1,41 @@
 touchclick
 ==================
 
-This is a small jQuery plugin to enable binding to either the touch events or the click event depending on what's available for the given platform.
+This is a small jquery plugin that allows you to easily bind to the touch or click events depending on what's available for the given platform. Unlike similar scripts, this also provides *immediate* visual feedback on touch platforms -- just as native apps do.
 
-On most platforms the browser waits up to 500ms before it actually triggers the 'click' event. This intentional delay was intended to provide time to decide if the dblclick event should be triggered. Unfortunately this creates a noticeable lag on touch screen devices.
+## Getting Started
 
-This issue is typically resolved by binding to the touchstart or touchend events. However if you bind to the touchstart event it can create problems when users try to swipe to scroll. If you only bind to the touchend event it will still feel laggy due to the lack of *immediate* visual feedback native apps typically provide.
+1. Bind to the **touchclick** event where you would have otherwise used click or touchend
+```javascript
+	$(".menu-btn").on("touchclick", function () {
+		console.log("अनित्य");
+	});
+```
 
-This plugin aims to alleviate these problems by providing immediate *visual* feedback on touchstart, and taking action only on touchend.
+2. Define a **.touchactive** style for the given element
+```css
+	.menu.btn.touchactive {
+		color: #eee;
+		background-color: #333;
+	}
+```
 
-Instructions
--------------
+3. (Optional) For delegated events add **data-touchclick="true"** to the elemnt you want the touchactive class to be added to.
+```html
+	<div class="menu btn" data-touchclick="true">Menu</div>
+```
 
-1. Define a .touchactive style for the element that will be applied immediately when the user touches the screen
-2. (Optional) For delegated events add data-touchclick="true" to the element you want the touchactive class to be added to
-3. Listen for the "touchclick" event where you would normally listen for "click" or "touchend"
+## Traditional Solutions
+### Bind to touchend ###
+Binding to touchend or using a script such as [fastclick](https://github.com/ftlabs/fastclick) will remove the delay for triggering the event. However, unlike touchclick, they do not provide immediate visual feedback as native apps do.
 
-Derek Petersen
+### Bind to touchend + provide a :hover style ###
+Binding to touchend or using [fastclick](https://github.com/ftlabs/fastclick) will remove the delay and provide some visual feedback. However, unlike touchclick and most native apps, when the user removes their finger from the element the :hover style sticks. While subtle, this still leaves web apps with a somewhat laggy feel.
 
-[Google+](https://plus.google.com/118244156822447731503) | [Twitter](http://twitter.com/tuxracer)
+
+## License
+Copyright (c) 2014, Derek Petersen
+
+Licensed under the MIT license.
+
+[Twitter](http://twitter.com/tuxracer) | [Google+](http://google.com/+DerekPetersen)
