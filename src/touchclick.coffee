@@ -5,7 +5,7 @@ Copyright (c) 2013 Derek Petersen https://github.com/tuxracer/touchclick MIT Lic
 $ = if typeof jQuery is 'function' then jQuery else require 'jquery'
 
 activeClass = 'touchactive'
-preventDefault = true
+preventDefaultClick = true
 
 # Store a timestamp of when the last touch event occurred
 lastTouched = 0
@@ -18,10 +18,7 @@ ignoreEvent = (e) ->
   if e.type.match 'touchstart|touchmove|touchend'
     lastTouched = currentTimestamp
 
-  if secondsSinceTouch < 3 and e.type.match 'mouse'
-    true
-  else
-    false
+  secondsSinceTouch < 3 and e.type.match 'mouse'
 
 getTouchclickEl = (target) ->
   $targetEl = $ target
@@ -54,7 +51,7 @@ touchend = (e) ->
 events = (type) ->
   $el = $ this
 
-  if preventDefault
+  if preventDefaultClick
     $el[type] 'click', (e) ->
       e.preventDefault()
 
