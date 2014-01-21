@@ -5,7 +5,7 @@ Copyright (c) 2013 Derek Petersen https://github.com/tuxracer/touchclick MIT Lic
 $ = if typeof jQuery is 'function' then jQuery else require 'jquery'
 
 activeClass = 'touchactive'
-preventDefaultClick = true
+preventDefaultClick = false
 
 # Store a timestamp of when the last touch event occurred
 lastTouched = 0
