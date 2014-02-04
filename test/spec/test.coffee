@@ -159,7 +159,7 @@ describe 'touchclick', ->
         @$el.on 'touchclick', @spy
 
       afterEach ->
-        window.navigator.msPointerEnabled = true
+        window.navigator.msPointerEnabled = false
         @spy.reset()
         @$el.off 'touchclick', @spy
 
@@ -254,7 +254,7 @@ describe 'touchclick', ->
         @$el.off 'touchclick', @spy
 
       afterEach ->
-        window.navigator.msPointerEnabled = true
+        window.navigator.msPointerEnabled = false
         @spy.reset()
 
       describe 'on MSPointerDown', ->
