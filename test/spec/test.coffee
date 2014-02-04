@@ -1,14 +1,14 @@
 describe 'touchclick', ->
   describe '#setup', ->
-    describe 'when window.navigator.msPointerEnabled is false', ->
+    describe 'when window.navigator.pointerEnabled is false', ->
       beforeEach ->
-        window.navigator.msPointerEnabled = false
+        window.navigator.pointerEnabled = false
         @spy = sinon.spy()
         @$el = $ '<div />'
         @$el.on 'touchclick', @spy
 
       afterEach ->
-        window.navigator.msPointerEnabled = false
+        window.navigator.pointerEnabled = false
         @spy.reset()
         @$el.off 'touchclick', @spy
 
@@ -151,15 +151,15 @@ describe 'touchclick', ->
           it 'should execute the callback once', ->
             expect(@spy.calledOnce).to.be.true
 
-    describe 'when window.navigator.msPointerEnabled is true', ->
+    describe 'when window.navigator.pointerEnabled is true', ->
       beforeEach ->
-        window.navigator.msPointerEnabled = true
+        window.navigator.pointerEnabled = true
         @spy = sinon.spy()
         @$el = $ '<div />'
         @$el.on 'touchclick', @spy
 
       afterEach ->
-        window.navigator.msPointerEnabled = false
+        window.navigator.pointerEnabled = false
         @spy.reset()
         @$el.off 'touchclick', @spy
 
@@ -189,16 +189,16 @@ describe 'touchclick', ->
 
             expect(@spy.called).to.be.false
 
-      describe 'on MSPointerDown', ->
+      describe 'on pointerdown', ->
         it 'should have the "touchactive" class', ->
-          @$el.trigger 'MSPointerDown'
+          @$el.trigger 'pointerdown'
           expect(@$el.hasClass 'touchactive').to.be.true
 
-        describe 'then MSPointerUp', ->
+        describe 'then pointerup', ->
           beforeEach ->
             @$el
-            .trigger('MSPointerDown')
-            .trigger('MSPointerUp')
+            .trigger('pointerdown')
+            .trigger('pointerup')
 
           it 'should not have the "touchactive" class', ->
             expect(@$el.hasClass 'touchactive').to.be.false
@@ -207,16 +207,16 @@ describe 'touchclick', ->
             expect(@spy.calledOnce).to.be.true
 
   describe '#teardown', ->
-    describe 'when window.navigator.msPointerEnabled is false', ->
+    describe 'when window.navigator.pointerEnabled is false', ->
       beforeEach ->
-        window.navigator.msPointerEnabled = false
+        window.navigator.pointerEnabled = false
         @spy = sinon.spy()
         @$el = $ '<div />'
         @$el.on 'touchclick', @spy
         @$el.off 'touchclick', @spy
 
       afterEach ->
-        window.navigator.msPointerEnabled = false
+        window.navigator.pointerEnabled = false
         @spy.reset()
 
       describe 'on mousedown', ->
@@ -245,28 +245,28 @@ describe 'touchclick', ->
 
             expect(@spy.called).to.be.false
 
-    describe 'when window.navigator.msPointerEnabled is true', ->
+    describe 'when window.navigator.pointerEnabled is true', ->
       beforeEach ->
-        window.navigator.msPointerEnabled = true
+        window.navigator.pointerEnabled = true
         @spy = sinon.spy()
         @$el = $ '<div />'
         @$el.on 'touchclick', @spy
         @$el.off 'touchclick', @spy
 
       afterEach ->
-        window.navigator.msPointerEnabled = false
+        window.navigator.pointerEnabled = false
         @spy.reset()
 
-      describe 'on MSPointerDown', ->
+      describe 'on pointerdown', ->
         it 'should not have the "touchactive" class', ->
-          @$el.trigger 'MSPointerDown'
+          @$el.trigger 'pointerdown'
           expect(@$el.hasClass 'touchactive').to.be.false
 
-        describe 'then MSPointerUp', ->
+        describe 'then pointerup', ->
           beforeEach ->
             @$el
-            .trigger('MSPointerDown')
-            .trigger('MSPointerUp')
+            .trigger('pointerdown')
+            .trigger('pointerup')
 
           it 'should not have the "touchactive" class', ->
             expect(@$el.hasClass 'touchactive').to.be.false

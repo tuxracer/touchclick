@@ -55,9 +55,9 @@ events = (type) ->
     $el[type] 'click', (e) ->
       e.preventDefault()
 
-  if window.navigator.msPointerEnabled
-    $el[type] 'MSPointerDown', touchstart
-    $el[type] 'MSPointerUp', touchend
+  if window.navigator.pointerEnabled
+    $el[type] 'pointerdown', touchstart
+    $el[type] 'pointerup', touchend
   else
     $el[type] 'touchstart mousedown', touchstart
     $el[type] 'touchmove mouseout', touchmove
