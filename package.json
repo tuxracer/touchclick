@@ -41,8 +41,8 @@
     "coffee-script": "~1.6.3",
     "grunt-mocha": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.4",
-    "browserify": "~2.34.3",
-    "grunt-browserify": "~1.2.9",
+    "browserify": "~11.0.1",
+    "grunt-browserify": "~4.0.0",
     "coffeeify": "~0.5.2",
     "jquery": ">=2.0",
     "grunt-contrib-copy": "~0.5.0"
