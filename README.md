@@ -42,11 +42,11 @@ Binding to touchend or using a script such as [fastclick](https://github.com/ftl
 Binding to touchend or using [fastclick](https://github.com/ftlabs/fastclick) will remove the delay and provide some visual feedback. However, unlike touchclick and most native apps, when the user removes their finger from the element the :hover style sticks. While subtle, this still leaves web apps with a somewhat laggy feel.
 
 ### Rely on tap-highlight-color ###
-Some browsers will add a large translucent overlay when items are tapped. However you do not have control over the exact style of an actively pressed element. This typically ends up looking a bit jenky.
+Some browsers will add a large translucent overlay when items are tapped. However you do not have control over the exact style of an actively pressed element. This typically ends up looking a bit janky.
 
 ## License
-Copyright (c) 2014, Derek Petersen
+Copyright (c) 2015, Derek Petersen
 
 Licensed under the MIT license.
 
-[Twitter](http://twitter.com/tuxracer) | [Google+](http://google.com/+DerekPetersen)
+[Twitter](https://twitter.com/tuxracer) | [Flipboard](https://flipboard.com/@tuxracer)
