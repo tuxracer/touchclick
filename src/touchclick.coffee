@@ -7,8 +7,20 @@ $ = if typeof jQuery is 'function' then jQuery else require 'jquery'
 activeClass = 'touchactive'
 preventDefaultClick = false
 
+# The event will be canceled if the touch moves more than this many pixels in any direction
+moveThreshold = 10
+
 # Store a timestamp of when the last touch event occurred
 lastTouched = 0
+
+# Store the coordinates of the touchstart event
+startCoords = x: null, y: null
+
+getTouchCoords = (e) ->
+  touch = e.originalEvent?.touches?[0]
+
+  if touch
+    x: touch.pageX, y: touch.pageY
 
 # Support devices with both touch and mouse (e.g. Windows 8, Chromebook Pixel)
 ignoreEvent = (e) ->
@@ -33,10 +45,15 @@ getTouchclickEl = (target) ->
     $targetEl
 
 touchstart = (e) ->
+  startCoords = getTouchCoords e
   getTouchclickEl(e.target).addClass(activeClass) unless ignoreEvent e
 
 touchmove = (e) ->
-  getTouchclickEl(e.target).removeClass(activeClass)
+  currentCoords = getTouchCoords e
+
+  # If there aren't any coordinates, or the user has moved further than the move threshold we will cancel the event
+  if not currentCoords or (Math.abs(currentCoords.x - startCoords.x) > moveThreshold or Math.abs(currentCoords.y - startCoords.y) > moveThreshold)
+    getTouchclickEl(e.target).removeClass(activeClass)
 
 touchend = (e) ->
   $touchclickEl = getTouchclickEl e.target
