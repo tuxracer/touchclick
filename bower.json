@@ -1,7 +1,7 @@
 {
   "name": "touchclick",
-  "version": "3.1.0",
-  "description": "Provide immediate native-like visual feedback on touch",
+  "version": "3.1.2",
+  "description": "(Obsolete) Provide immediate native-like visual feedback on touch",
   "main": "touchclick.js",
   "dependencies": {
     "jquery": ">=1.8"

@@ -1,12 +1,12 @@
 {
   "name": "touchclick",
-  "version": "3.1.1",
-  "description": "Provide immediate native-like visual feedback on touch",
+  "version": "3.1.2",
+  "description": "(Obsolete) Provide immediate native-like visual feedback on touch",
   "homepage": "https://github.com/tuxracer/touchclick",
   "author": {
     "name": "Derek Petersen",
-    "email": "tuxracer@gmail.com",
-    "url": "https://github.com/tuxracer"
+    "email": "meimporta+npm@protonmail.com",
+    "url": "https://mastodon.social/@tuxracer"
   },
   "license": "MIT",
   "repository": {
@@ -24,6 +24,7 @@
     "jquery": ">=1.8"
   },
   "keywords": [
+    "obsolete",
     "touch",
     "touchstart",
     "touchend",
