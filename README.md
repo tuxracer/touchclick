@@ -1,3 +1,5 @@
+### ⚠️  Note: This is no longer necessary, nor recommended for the latest versions of mobile browsers. See: https://webkit.org/blog/5610/more-responsive-tapping-on-ios/
+
 touchclick
 ==================
 
@@ -49,4 +51,10 @@ Copyright (c) 2015, Derek Petersen
 
 Licensed under the MIT license.
 
-[Twitter](https://twitter.com/tuxracer) | [Flipboard](https://flipboard.com/@tuxracer)
+[@tuxracer@mastodon.social](https://mastodon.social/@tuxracer)
+
+Bitcoin (BTC) `1BkpN3NKNRvs1ByGRYJDMFJ337xPDWVEu`
+
+Ethereum (ETH) `0x08abDAc4bcd857741588680c829D8BfeE29996d1`
+
+Ripple (XRP) `r9qTzTE9sTi2xDkP1goNYnQYXz1hKKKVXz`
